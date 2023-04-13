@@ -11,9 +11,9 @@ on:
       - 'v**'
 
 env:
-  IMAGE_NAME: morooi/apis
-  VERSION: 1.2.0
-  JAR_FILE: morooi-apis.jar
+  IMAGE_NAME: morooi/morooi-telegram-bot
+  VERSION: 1.0.0
+  JAR_FILE: morooi-telegram-bot.jar
 
 jobs:
   build:
