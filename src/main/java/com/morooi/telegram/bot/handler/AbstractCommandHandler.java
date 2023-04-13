@@ -1,7 +1,6 @@
 package com.morooi.telegram.bot.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.morooi.telegram.bot.contant.CommandEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;

@@ -5,7 +5,6 @@ import com.morooi.telegram.bot.config.BotConfigProperties;
 import com.morooi.telegram.bot.contant.CommandEnum;
 import com.morooi.telegram.bot.handler.AbstractCommandHandler;
 import com.morooi.telegram.bot.handler.CommandHandlerFactory;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -20,19 +19,18 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class MorooiBot extends TelegramLongPollingBot {
 
     private final BotConfigProperties botConfigProperties;
 
-    @Override
-    public String getBotUsername() {
-        return botConfigProperties.getBotName();
+    public MorooiBot(BotConfigProperties botConfigProperties) {
+        super(botConfigProperties.getBotToken());
+        this.botConfigProperties = botConfigProperties;
     }
 
     @Override
-    public String getBotToken() {
-        return botConfigProperties.getBotToken();
+    public String getBotUsername() {
+        return botConfigProperties.getBotName();
     }
 
     @Override
