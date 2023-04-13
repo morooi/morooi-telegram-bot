@@ -4,6 +4,7 @@
 name: Build And Push APIs Docker Image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - '**'
