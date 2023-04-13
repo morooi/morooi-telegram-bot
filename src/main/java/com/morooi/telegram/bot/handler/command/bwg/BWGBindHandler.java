@@ -1,6 +1,6 @@
 package com.morooi.telegram.bot.handler.command.bwg;
 
-import com.morooi.telegram.bot.contant.CommandEnum;
+import com.morooi.telegram.bot.constant.CommandEnum;
 import com.morooi.telegram.bot.db.mapper.BwgApiKeyMapper;
 import com.morooi.telegram.bot.db.model.BwgApiKeyDO;
 import com.morooi.telegram.bot.handler.AbstractCommandHandler;

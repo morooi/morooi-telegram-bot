@@ -1,4 +1,4 @@
-package com.morooi.telegram.bot.contant;
+package com.morooi.telegram.bot.constant;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;

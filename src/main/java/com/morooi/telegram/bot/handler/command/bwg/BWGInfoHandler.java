@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSON;
-import com.morooi.telegram.bot.contant.CommandEnum;
+import com.morooi.telegram.bot.constant.CommandEnum;
 import com.morooi.telegram.bot.db.mapper.BwgApiKeyMapper;
 import com.morooi.telegram.bot.db.model.BwgApiKeyDO;
 import com.morooi.telegram.bot.handler.AbstractCommandHandler;

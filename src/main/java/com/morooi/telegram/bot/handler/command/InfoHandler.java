@@ -1,7 +1,7 @@
 package com.morooi.telegram.bot.handler.command;
 
 import cn.hutool.core.util.StrUtil;
-import com.morooi.telegram.bot.contant.CommandEnum;
+import com.morooi.telegram.bot.constant.CommandEnum;
 import com.morooi.telegram.bot.handler.AbstractCommandHandler;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

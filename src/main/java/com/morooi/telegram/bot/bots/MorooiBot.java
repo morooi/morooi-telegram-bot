@@ -2,7 +2,7 @@ package com.morooi.telegram.bot.bots;
 
 import cn.hutool.json.JSONUtil;
 import com.morooi.telegram.bot.config.BotConfigProperties;
-import com.morooi.telegram.bot.contant.CommandEnum;
+import com.morooi.telegram.bot.constant.CommandEnum;
 import com.morooi.telegram.bot.handler.AbstractCommandHandler;
 import com.morooi.telegram.bot.handler.CommandHandlerFactory;
 import lombok.extern.slf4j.Slf4j;
