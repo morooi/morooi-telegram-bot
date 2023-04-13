@@ -1,0 +1,9 @@
+services:
+  morooi-telegram-bot:
+    container_name: morooi-telegram-bot
+    image: morooi/morooi-telegram-bot:latest
+    volumes:
+      - /root/bot/file:/bot/file
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+    restart: unless-stopped
