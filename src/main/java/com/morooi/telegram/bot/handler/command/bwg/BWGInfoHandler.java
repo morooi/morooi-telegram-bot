@@ -18,6 +18,9 @@ import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -56,11 +59,33 @@ public class BWGInfoHandler extends AbstractCommandHandler {
         String planMonthlyData = MessageUtils.replaceForMarkDownV2(String.valueOf(serviceInfo.getPlanMonthlyData() >> 30));
         String dataCounter = MessageUtils.replaceForMarkDownV2(BigDecimal.valueOf(serviceInfo.getDataCounter() >> 20).divide(BigDecimal.valueOf(1024L), 2, RoundingMode.HALF_UP).toString());
         String dataPercent = MessageUtils.replaceForMarkDownV2(BigDecimal.valueOf(serviceInfo.getDataCounter()).multiply(BigDecimal.valueOf(100L)).divide(BigDecimal.valueOf(serviceInfo.getPlanMonthlyData()), 2, RoundingMode.HALF_UP).toString());
-        String dataNextReset = MessageUtils.replaceForMarkDownV2(DateUtil.formatDateTime(new Date(serviceInfo.getDataNextReset() * 1000)));
+        Date dataNextResetDate = new Date(serviceInfo.getDataNextReset() * 1000);
+        String dataNextReset = MessageUtils.replaceForMarkDownV2(DateUtil.formatDateTime(dataNextResetDate));
 
-        String info = StrUtil.format("*主机名*：{}\n*IP*：`{}`\n*数据中心*：{}\n*流量使用情况*：{} GB / {} GB \\({} %\\)\n*流量重置时间*：{}",
-                hostname, ipAddresses, nodeDatacenter, dataCounter, planMonthlyData, dataPercent, dataNextReset);
+        String duration = this.getDuration(dataNextResetDate);
+
+        String info = StrUtil.format("*主机名*：{}\n*IP*：`{}`\n*数据中心*：{}\n*流量使用情况*：{} GB / {} GB \\({} %\\)\n*流量重置时间*：{}\n*距离重置还有*：{}",
+                hostname, ipAddresses, nodeDatacenter, dataCounter, planMonthlyData, dataPercent, dataNextReset, duration);
         answer.setText(info);
+    }
+
+    private String getDuration(Date dataNextResetDate) {
+        LocalDateTime dataNextResetDateTime = dataNextResetDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime now = LocalDateTime.now();
+
+        // 计算时间差
+        Duration duration = Duration.between(now, dataNextResetDateTime);
+        long diffDays = duration.toDays();
+        long diffHours = duration.toHours() % 24;
+        long diffMinutes = duration.toMinutes() % 60;
+
+        if (diffDays != 0) {
+            return StrUtil.format("{}天{}小时{}分钟", diffDays, diffHours, diffMinutes);
+        } else if (diffHours != 0) {
+            return StrUtil.format("{}小时{}分钟", diffHours, diffMinutes);
+        } else {
+            return StrUtil.format("{}分钟", diffMinutes);
+        }
     }
 
     private BwgApiDTO getServiceInfo(String veid, String apiKey) {
